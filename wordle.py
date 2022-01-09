@@ -7,16 +7,23 @@ class color:
    RED = '\033[1;31;48m'
    END = '\033[1;37;0m'
 
-f = open("wordlist")
-
-words = []
+#Possible Answers
+f = open("answerlist")
+answers = []
 lines = f.readlines()
-
 for line in lines:
     if len(line) >= 2:
-        words.append(line.strip().lower())
+        answers.append(line.strip().lower())
 
-random_word = random.choice(words)
+#Possible Guesses
+f = open("guesslist")
+guesslist = []
+lines = f.readlines()
+for line in lines:
+    if len(line) >= 2:
+        guesslist.append(line.strip().lower())
+
+random_word = random.choice(answers)
 #print(random_word)
 
 guesses = 1
@@ -25,7 +32,7 @@ won = False
 while guesses <= 6 and won == False:
     ask_string = "Guess " + str(guesses) + ": "
     val = raw_input(ask_string)
-    if len(val) == 5 and val in words:
+    if len(val) == 5 and val in guesslist:
         coloured_out = ""
         for i, letter in enumerate(val):
             if letter == random_word[i]:
@@ -40,7 +47,7 @@ while guesses <= 6 and won == False:
     else:
         if len(val) < 5:
             print("word must be 5 letters long")
-        if val not in words:
+        if val not in answers:
             print("word not in dictionary")
     if val == random_word:
         won = True
