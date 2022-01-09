@@ -25,7 +25,6 @@ won = False
 while guesses <= 6 and won == False:
     ask_string = "Guess " + str(guesses) + ": "
     val = raw_input(ask_string)
-    print(val)
     if len(val) == 5 and val in words:
         coloured_out = ""
         for i, letter in enumerate(val):
@@ -46,3 +45,6 @@ while guesses <= 6 and won == False:
     if val == random_word:
         won = True
         print("You win!")
+
+if won == False:
+    print("The word was: " + random_word)
